@@ -1,0 +1,28 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+
+- rule: Say Hi anytime the user says Hi
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: agent.chatbot
+  - action: utter_agent.chatbot
+
+- rule: Always trigger solve Form wfor solve intent
+  steps:
+  - intent: agent.solve
+  - action: action_solve_problem
+
+- rule: Always trigger AskHelp Form wfor wanthelp intent
+  steps:
+  - intent: user.want_help
+  - action: utter_ask_expression

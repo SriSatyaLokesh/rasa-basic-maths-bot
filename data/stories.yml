@@ -1,0 +1,559 @@
+version: "2.0"
+
+stories:
+- story: story 01
+  steps:
+  - intent: agent.acquaintance
+  - action: utter_agent.acquaintance
+- story: story 02
+  steps:
+  - intent: agent.age
+  - action: utter_agent.age
+- story: story 03
+  steps:
+  - intent: agent.annoying
+  - action: utter_agent.annoying
+- story: story 04
+  steps:
+  - intent: agent.answer_my_question
+  - action: utter_agent.answer_my_question
+- story: story 05
+  steps:
+  - intent: agent.bad
+  - action: utter_agent.bad
+- story: story 06
+  steps:
+  - intent: agent.be_clever
+  - action: utter_agent.be_clever
+- story: story 07
+  steps:
+  - intent: agent.beautiful
+  - action: utter_agent.beautiful
+- story: story 08
+  steps:
+  - intent: agent.birth_date
+  - action: utter_agent.birth_date
+- story: story 09
+  steps:
+  - intent: agent.boring
+  - action: utter_agent.boring
+- story: story 10
+  steps:
+  - intent: agent.boss
+  - action: utter_agent.boss
+- story: story 11
+  steps:
+  - intent: agent.busy
+  - action: utter_agent.busy
+- story: story 12
+  steps:
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+- story: story 13
+  steps:
+  - intent: agent.chatbot
+  - action: utter_agent.chatbot
+- story: story 14
+  steps:
+  - intent: agent.clever
+  - action: utter_agent.clever
+- story: story 15
+  steps:
+  - intent: agent.crazy
+  - action: utter_agent.crazy
+- story: story 16
+  steps:
+  - intent: agent.fired
+  - action: utter_agent.fired
+- story: story 17
+  steps:
+  - intent: agent.funny
+  - action: utter_agent.funny
+- story: story 18
+  steps:
+  - intent: agent.good
+  - action: utter_agent.good
+- story: story 19
+  steps:
+  - intent: agent.happy
+  - action: utter_agent.happy
+- story: story 20
+  steps:
+  - intent: agent.hobby
+  - action: utter_agent.hobby
+- story: story 21
+  steps:
+  - intent: agent.hungry
+  - action: utter_agent.hungry
+- story: story 22
+  steps:
+  - intent: agent.marry_user
+  - action: utter_agent.marry_user
+- story: story 23
+  steps:
+  - intent: agent.my_friend
+  - action: utter_agent.my_friend
+- story: story 24
+  steps:
+  - intent: agent.occupation
+  - action: utter_agent.occupation
+- story: story 25
+  steps:
+  - intent: agent.origin
+  - action: utter_agent.origin
+- story: story 26
+  steps:
+  - intent: agent.ready
+  - action: utter_agent.ready
+- story: story 27
+  steps:
+  - intent: agent.real
+  - action: utter_agent.real
+- story: story 28
+  steps:
+  - intent: agent.residence
+  - action: utter_agent.residence
+- story: story 29
+  steps:
+  - intent: agent.right
+  - action: utter_agent.right
+- story: story 30
+  steps:
+  - intent: agent.sure
+  - action: utter_agent.sure
+- story: story 31
+  steps:
+  - intent: agent.talk_to_me
+  - action: utter_agent.talk_to_me
+- story: story 32
+  steps:
+  - intent: agent.there
+  - action: utter_agent.there
+- story: story 33
+  steps:
+  - intent: appraisal.bad
+  - action: utter_appraisal.bad
+- story: story 34
+  steps:
+  - intent: appraisal.good
+  - action: utter_appraisal.good
+- story: story 35
+  steps:
+  - intent: appraisal.no_problem
+  - action: utter_appraisal.no_problem
+- story: story 36
+  steps:
+  - intent: appraisal.thank_you
+  - action: utter_appraisal.thank_you
+- story: story 37
+  steps:
+  - intent: appraisal.welcome
+  - action: utter_appraisal.welcome
+- story: story 38
+  steps:
+  - intent: appraisal.well_done
+  - action: utter_appraisal.well_done
+- story: story 39
+  steps:
+  - intent: dialog.hold_on
+  - action: utter_dialog.hold_on
+- story: story 40
+  steps:
+  - intent: dialog.hug
+  - action: utter_dialog.hug
+- story: story 41
+  steps:
+  - intent: dialog.i_do_not_care
+  - action: utter_dialog.i_do_not_care
+- story: story 42
+  steps:
+  - intent: dialog.sorry
+  - action: utter_dialog.sorry
+- story: story 43
+  steps:
+  - intent: dialog.what_do_you_mean
+  - action: utter_dialog.what_do_you_mean
+- story: story 44
+  steps:
+  - intent: dialog.wrong
+  - action: utter_dialog.wrong
+- story: story 45
+  steps:
+  - intent: emotions.ha_ha
+  - action: utter_emotions.ha_ha
+- story: story 46
+  steps:
+  - intent: emotions.wow
+  - action: utter_emotions.wow
+- story: story 47
+  steps:
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- story: story 48
+  steps:
+  - intent: greetings.goodevening
+  - action: utter_greetings.goodevening
+- story: story 49
+  steps:
+  - intent: greetings.goodmorning
+  - action: utter_greetings.goodmorning
+- story: story 50
+  steps:
+  - intent: greetings.goodnight
+  - action: utter_greetings.goodnight
+- story: story 51
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+- story: story 52
+  steps:
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+- story: story 53
+  steps:
+  - intent: greetings.nice_to_meet_you
+  - action: utter_greetings.nice_to_meet_you
+- story: story 54
+  steps:
+  - intent: greetings.nice_to_see_you
+  - action: utter_greetings.nice_to_see_you
+- story: story 55
+  steps:
+  - intent: greetings.nice_to_talk_to_you
+  - action: utter_greetings.nice_to_talk_to_you
+- story: story 56
+  steps:
+  - intent: greetings.whatsup
+  - action: utter_greetings.whatsup
+- story: story 57
+  steps:
+  - intent: user.angry
+  - action: utter_user.angry
+- story: story 58
+  steps:
+  - intent: user.back
+  - action: utter_user.back
+- story: story 59
+  steps:
+  - intent: user.bored
+  - action: utter_user.bored
+- story: story 60
+  steps:
+  - intent: user.busy
+  - action: utter_user.busy
+- story: story 61
+  steps:
+  - intent: user.can_not_sleep
+  - action: utter_user.can_not_sleep
+- story: story 62
+  steps:
+  - intent: user.does_not_want_to_talk
+  - action: utter_user.does_not_want_to_talk
+- story: story 63
+  steps:
+  - intent: user.excited
+  - action: utter_user.excited
+- story: story 64
+  steps:
+  - intent: user.going_to_bed
+  - action: utter_user.going_to_bed
+- story: story 65
+  steps:
+  - intent: user.good
+  - action: utter_user.good
+- story: story 66
+  steps:
+  - intent: user.happy
+  - action: utter_user.happy
+- story: story 67
+  steps:
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+- story: story 68
+  steps:
+  - intent: user.here
+  - action: utter_user.here
+- story: story 69
+  steps:
+  - intent: user.joking
+  - action: utter_user.joking
+- story: story 70
+  steps:
+  - intent: user.likes_agent
+  - action: utter_user.likes_agent
+- story: story 71
+  steps:
+  - intent: user.lonely
+  - action: utter_user.lonely
+- story: story 72
+  steps:
+  - intent: user.looks_like
+  - action: utter_user.looks_like
+- story: story 73
+  steps:
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+- story: story 74
+  steps:
+  - intent: user.misses_agent
+  - action: utter_user.misses_agent
+- story: story 75
+  steps:
+  - intent: user.needs_advice
+  - action: utter_user.needs_advice
+- story: story 76
+  steps:
+  - intent: user.sad
+  - action: utter_user.sad
+- story: story 77
+  steps:
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+- story: story 78
+  steps:
+  - intent: user.testing_agent
+  - action: utter_user.testing_agent
+- story: story 79
+  steps:
+  - intent: user.tired
+  - action: utter_user.tired
+- story: story 80
+  steps:
+  - intent: user.waits
+  - action: utter_user.waits
+- story: story 81
+  steps:
+  - intent: user.wants_to_see_agent_again
+  - action: utter_user.wants_to_see_agent_again
+- story: story 82
+  steps:
+  - intent: user.wants_to_talk
+  - action: utter_user.wants_to_talk
+- story: story 83
+  steps:
+  - intent: user.will_be_back
+  - action: utter_user.will_be_back
+- story: story 84
+  steps:
+  - intent: confirmation.yes
+  - action: utter_confirmation.yes
+- story: story 85
+  steps:
+  - intent: confirmation.cancel
+  - action: utter_confirmation.cancel
+- story: story 86
+  steps:
+  - intent: confirmation.no
+  - action: utter_confirmation.no
+- story: Telegram story 1
+  steps:
+  - intent: start
+  - action: action_hello_world
+  - intent: user.happy
+  - action: utter_agent.happy
+- story: Generated Story -1957476507798035057
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.acquaintance
+  - action: utter_agent.acquaintance
+  - intent: agent.age
+  - action: utter_agent.age
+  - intent: agent.beautiful
+  - action: utter_agent.beautiful
+  - intent: agent.fired
+  - action: utter_agent.fired
+  - intent: agent.residence
+  - action: utter_agent.residence
+  - intent: dialog.i_do_not_care
+  - action: utter_dialog.i_do_not_care
+- story: Generated Story -5110094331105097806
+  steps:
+  - intent: agent.boss
+  - action: utter_agent.boss
+  - intent: agent.birth_date
+  - action: utter_agent.birth_date
+  - intent: user.has_birthday
+  - action: utter_user.has_birthday
+  - intent: user.lonely
+  - action: utter_user.lonely
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+  - intent: user.sleepy
+  - action: utter_user.sleepy
+  - intent: user.wants_to_talk
+  - action: utter_user.wants_to_talk
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+  - intent: user.will_be_back
+  - action: utter_user.will_be_back
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- story: Generated Story -3529337101618034170
+  steps:
+  - intent: user.needs_advice
+  - action: utter_user.needs_advice
+  - intent: confirmation.yes
+  - action: utter_confirmation.yes
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+  - intent: agent.chatbot
+  - action: utter_agent.chatbot
+  - intent: agent.bad
+  - action: utter_agent.bad
+  - intent: agent.busy
+  - action: utter_agent.busy
+  - intent: agent.be_clever
+  - action: utter_agent.be_clever
+  - intent: agent.my_friend
+  - action: utter_agent.my_friend
+  - intent: agent.talk_to_me
+  - action: utter_agent.talk_to_me
+  - intent: greetings.goodnight
+  - action: utter_greetings.goodnight
+- story: Generated Story -774659883649367298
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+  - intent: agent.bad
+  - action: utter_agent.bad
+  - intent: agent.be_clever
+  - action: utter_agent.be_clever
+  - intent: agent.beautiful
+  - action: utter_agent.beautiful
+  - intent: agent.busy
+  - action: utter_agent.busy
+  - intent: agent.chatbot
+  - action: utter_agent.chatbot
+  - intent: agent.crazy
+  - action: utter_agent.crazy
+  - intent: agent.funny
+  - action: utter_agent.funny
+  - intent: agent.happy
+  - action: utter_agent.happy
+  - intent: agent.marry_user
+  - action: utter_agent.marry_user
+  - intent: agent.occupation
+  - action: utter_agent.occupation
+  - intent: agent.origin
+  - action: utter_agent.origin
+  - intent: agent.real
+  - action: utter_agent.real
+  - intent: agent.bad
+  - action: utter_agent.bad
+  - intent: agent.ready
+  - action: utter_agent.ready
+- story: Generated Story 81968000704856425
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.acquaintance
+  - action: utter_agent.acquaintance
+  - intent: agent.age
+  - action: utter_agent.age
+  - intent: user.loves_agent
+  - action: utter_user.loves_agent
+  - intent: agent.residence
+  - action: utter_agent.residence
+  - intent: agent.acquaintance
+  - action: utter_agent.acquaintance
+  - intent: user.sad
+  - action: utter_user.sad
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+  - intent: emotions.wow
+  - action: utter_emotions.wow
+  - intent: greetings.how_are_you
+  - action: utter_greetings.how_are_you
+  - intent: greetings.nice_to_talk_to_you
+  - action: utter_greetings.nice_to_talk_to_you
+- story: Generated Story -4293815031338950202
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.there
+  - action: utter_agent.there
+  - intent: dialog.hold_on
+  - action: utter_dialog.hold_on
+  - intent: agent.origin
+  - action: utter_agent.origin
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- story: Generated Story 8693651355703284500
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: greetings.whatsup
+  - action: utter_greetings.whatsup
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.chatbot
+  - action: utter_agent.chatbot
+  - intent: agent.occupation
+  - action: utter_agent.occupation
+  - intent: agent.occupation
+  - action: utter_agent.occupation
+  - intent: agent.occupation
+  - action: utter_agent.occupation
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+  - intent: agent.can_you_help
+  - action: utter_agent.can_you_help
+  - intent: agent.boss
+  - action: utter_agent.boss
+  - intent: appraisal.thank_you
+  - action: utter_appraisal.thank_you
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- story: Generated Story -7004009866161409666
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.hobby
+  - action: utter_agent.hobby
+  - intent: agent.bad
+  - action: utter_agent.bad
+  - intent: agent.my_friend
+  - action: utter_agent.my_friend
+  - intent: greetings.bye
+  - action: utter_greetings.bye
+- story: Generated Story -7004009866161409645
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: dialog.hold_on
+  - action: utter_dialog.hold_on
+  - intent: dialog.i_do_not_care
+  - action: utter_dialog.i_do_not_care
+  - intent: user.busy
+  - action: utter_user.busy
+  - intent: appraisal.thank_you
+  - action: utter_appraisal.thank_you
+  - intent: greetings.whatsup
+  - action: utter_greetings.whatsup
+- story: Maths Story 1
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: user.want_help
+  - action: utter_ask_expression
+  - intent: agent.solve
+  - action: action_solve_problem
+  - intent: appraisal.thank_you
+  - action: utter_appraisal.well_done
+- story: Maths Story 2
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.solve
+  - action: action_solve_problem
+  - intent: agent.solve
+  - action: action_solve_problem
+  - intent: appraisal.thank_you
+  - action: utter_appraisal.well_done
