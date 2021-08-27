@@ -1,0 +1,16 @@
+{
+    "problems": [
+        {
+            "problem": "2+3+6-1",
+            "answer": "10"
+        },
+        {
+            "problem": "2+3+6-1-3",
+            "answer": "8"
+        },
+        {
+            "problem": "2+3+6-1+10",
+            "answer": "20"
+        }
+    ]
+}

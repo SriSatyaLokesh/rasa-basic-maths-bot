@@ -1,0 +1,2 @@
+class InavlidExpressionException(Exception):
+    pass
