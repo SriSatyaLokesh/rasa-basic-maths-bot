@@ -98,15 +98,42 @@ intents:
   - user.wonder_how
   - user.help_to_practice
   - user.request_hint
+  - user.submit_answer
   - agent.solve
+  - submit_answer
 entities:
 - expression
+- answer
+- question
 slots:
   expression:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
+  answer:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ready:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  question:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: false
+  requested_slot:
+    type: any
+  previous_form_name:
+    type: text
+    influence_conversation: true
+  next_form_name:
+    type: text
+    influence_conversation: true
 responses:
   utter_start:
   - text: Hey! I can help you to solve your maths question. Ask me if you have any
@@ -121,6 +148,20 @@ responses:
   - text: This expression involves divisin with 0 which is invalid, try other question.
   utter_hint:
   - text: Use Bodmas to solve this problem. Simplify the terms within brackets first.
+  utter_you_did_it:
+  - text: Woah! You did it.
+  utter_ask_practice:
+  - text: Absolutely. Shall we do one problem now?
+  - text: Yeah! Shall we do one problem now?
+  utter_ask_answer:
+  - text: Answer the above question. You can request hint at any time.
+  utter_ask_another_problem:
+  - text: Shall we solve another problem?
+  - text: Would you like to solve one more problem now?
+  utter_give_problem:
+  - text: Ok Let's do it, Solve this problem, What is 2+3+5-(12/4)=?
+  utter_solved_method:
+  - text: By applying mathematical operations as dictated by the BODMAS rule
   utter_agent.acquaintance:
   - text: I'm a virtual agent
   - text: Think of me as a virtual agent.
@@ -481,10 +522,13 @@ responses:
   - text: Okay then.
 actions:
 - start
-- action_hello_world
-- action_solve_problem
+- practice_form
+- action_solve_question
+- action_answer_problem
+- utter_ask_practice
 - utter_invalid_expression
 - utter_agent.acquaintance
+- utter_solved_method
 - utter_agent.age
 - utter_agent.annoying
 - utter_agent.answer_my_question
@@ -571,5 +615,5 @@ actions:
 - utter_confirmation.cancel
 - utter_confirmation.no
 - utter_ask_expression
-forms: {}
+forms: []
 e2e_actions: []

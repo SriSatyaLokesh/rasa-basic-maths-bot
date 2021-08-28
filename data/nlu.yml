@@ -315,7 +315,6 @@ nlu:
     - you know a lot of things
     - you have a lot of knowledge
     - you know so much
-    - how smart you are?
     - how brainy you are?
     - how clever you are
     - how brilliant you are?
@@ -334,7 +333,6 @@ nlu:
     - you're clever
     - you're pretty smart
     - you're qualified
-    - why are you so smart?
     - you are so clever
 - intent: agent.crazy
   examples: |
@@ -1044,24 +1042,24 @@ nlu:
   examples: |
     - don't
     - don't want
-    - need not
+    - [need not]{"entity":"ready","value":"no"}
     - don't come
     - never help
-    - never
-    - not needed
-    - of course not
+    - [never]{"entity":"ready","value":"no"}
+    - [not needed]{"entity":"ready","value":"no"}
+    - [of course not]{"entity":"ready","value":"no"}
     - not at this time
     - not exactly
-    - absolutely no
-    - no forget
-    - I think that’ll be all for now
-    - that's all for now
-    - maybe later
-    - not now
-    - do not
-    - no thanks
-    - no don't want
-    - sorry no
+    - absolutely [no]{"entity":"ready","value":"no"}
+    - [no]{"entity":"ready","value":"no"} forget
+    - I think [that’ll be all for now]{"entity":"ready","value":"no"}
+    - [that's all for now]{"entity":"ready","value":"no"}
+    - [maybe later]{"entity":"ready","value":"no"}
+    - [not now]{"entity":"ready","value":"no"}
+    - [do not]{"entity":"ready","value":"no"}
+    - [no]{"entity":"ready","value":"no"} thanks
+    - [no]{"entity":"ready","value":"no"} don't want
+    - sorry [no]{"entity":"ready","value":"no"}
     - don't want your help
     - I don't you help
     - I don't want your assistance
@@ -1074,33 +1072,34 @@ nlu:
     - okay keep it in mind
     - nope i dont need your help
     - Don't show off
-    - nope
+    - [nope]{"entity":"ready","value":"no"}
+    - [no]{"entity":"ready","value":"no"}
 - intent: confirmation.yes
   examples: |
-    - yeah exactly
+    - [yeah]{"entity":"ready","value":"yes"} exactly
     - okay that's fine
     - I agree
     - that is ok
     - I guess
-    - okey
+    - [okey]{"entity":"ready","value":"yes"}
     - ya
-    - sure
-    - sure, let's do
-    - yeah, let's do
-    - ok yes
-    - yes it is
-    - yep
-    - yew
-    - yeah
-    - yeah fine
-    - yea fine
-    - yep okay
+    - [sure]{"entity":"ready","value":"yes"}
+    - [sure]{"entity":"ready","value":"yes"} let's do
+    - [yeah]{"entity":"ready","value":"yes"} let's do
+    - ok [yes]{"entity":"ready","value":"yes"}
+    - [yes]{"entity":"ready","value":"yes"} it is
+    - [yep]{"entity":"ready","value":"yes"}
+    - [yew]{"entity":"ready","value":"yes"}
+    - [yeah]{"entity":"ready","value":"yes"}
+    - [yeah]{"entity":"ready","value":"yes"} fine
+    - [yea]{"entity":"ready","value":"yes"} fine
+    - [yep]{"entity":"ready","value":"yes"} okay
     - fine okay
-    - yup
-    - YEAH
+    - [yup]{"entity":"ready","value":"yes"}
+    - [YEAH]{"entity":"ready","value":"yes"}
     - okay buddy
     - oh okay
-    - yeah sure
+    - [yeah sure]{"entity":"ready","value":"yes"}
     - okay cool
     - coool
 - intent: dialog.hold_on
@@ -1989,26 +1988,29 @@ nlu:
 - regex: expression
   examples: |
     - [0-9]*( ){0,}([+-\/*]( ){0,}[0-9()]*( ){0,})*
+- regex: answer
+  examples: |
+    - [-+]?([0-9]*\.[0-9]+|[0-9]+)
 - intent: agent.solve
   examples: |
-    - what is [145/(2+9*3) - 30.70123](expression)
-    - what is [2+2](expression)=?
-    - what is [145/(2+7*3)-30.70123](expression)=?
-    - what is [145/(2+9*3) - 32.70123](expression)?
-    - what is [2-2](expression)=?
-    - what is [2-2](expression)
-    - what is [43 * 43](expression)
-    - solve [43 * 43](expression)
-    - tell me [2+23+56-2](expression)
-    - solve [2+23+576-2](expression)
-    - can you solve [2*33+56-2](expression)?
-    - help me with [2*23/56-2](expression)
-    - please solve [2/23+(56*2)/2](expression)
-    - answer of [2/(23+56)-2/(2+3)](expression)?
-    - add [2+2](expression)
-    - answer [5+8-9+3](expression)
-    - multiply [3*4](expression)
-    - divide [3/1](expression)
+    - what is [145/(2+9*3) - 30.70123]{"entity":"expression"}
+    - what is [2+2]{"entity":"expression"}=?
+    - what is [145/(2+7*3)-30.70123]{"entity":"expression"}=?
+    - what is [145/(2+9*3) - 32.70123]{"entity":"expression"}?
+    - what is [2-2]{"entity":"expression"}=?
+    - what is [2-2]{"entity":"expression"}
+    - what is [43 * 43]{"entity":"expression"}
+    - solve [43 * 43]{"entity":"expression"}
+    - tell me [2+23+56-2]{"entity":"expression"}
+    - solve [2+23+576-2]{"entity":"expression"}
+    - can you solve [2*33+56-2]{"entity":"expression"}?
+    - help me with [2*23/56-2]{"entity":"expression"}
+    - please solve [2/23+(56*2)/2]{"entity":"expression"}
+    - answer of [2/(23+56)-2/(2+3)]{"entity":"expression"}?
+    - add [2+2]{"entity":"expression"}
+    - answer [5+8-9+3]{"entity":"expression"}
+    - multiply [3*4]{"entity":"expression"}
+    - divide [3/1]{"entity":"expression"}
 - intent: user.want_help
   examples: |
     - I need some help with a maths question
@@ -2019,9 +2021,9 @@ nlu:
     - can you help me with additions?
     - please help me to solve a maths question
     - could you please help me to solve a maths question
-    - can you solve this [2+53/56-2](expression) question?
+    - can you solve this [2+53/56-2]{"entity":"expression"} question?
     - I need your help to solve a maths problem
-    - please help me to solve an equation [2+53/56-2](expression)
+    - please help me to solve an equation [2+53/56-2]{"entity":"expression"}
 - intent: user.ask_how
   examples: |
     - Wow. How did you get that?
@@ -2069,3 +2071,12 @@ nlu:
     - hint please
     - tell me a hint
     - help me with a hint
+- intent: submit_answer
+  examples: |
+    - [23]{"entity":"answer"}
+    - [-34.34]{"entity":"answer"}
+    - [34.54724]{"entity":"answer"}
+    - answer is [234]{"entity":"answer"}
+    - my answer is [-34]{"entity":"answer"}
+    - my answer is [56.45]{"entity":"answer"}
+    - i think it is [67973.21]{"entity":"answer"}

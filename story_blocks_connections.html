@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [fillcolor=green, label=START, style=filled];
+"-1" [fillcolor=red, label=END, style=filled];
+1 [fillcolor=lightblue, label="Say goodbye anyti...", shape=rect, style=filled];
+2 [fillcolor=lightblue, label="Say Hi anytime th...", shape=rect, style=filled];
+3 [fillcolor=lightblue, label="Say 'I am a bot' ...", shape=rect, style=filled];
+4 [fillcolor=lightblue, label="Always trigger so...", shape=rect, style=filled];
+5 [fillcolor=lightblue, label="Always trigger As...", shape=rect, style=filled];
+6 [fillcolor=lightblue, label="Activate form", shape=rect, style=filled];
+7 [fillcolor=lightblue, label="story 01", shape=rect, style=filled];
+8 [fillcolor=lightblue, label="story 02", shape=rect, style=filled];
+9 [fillcolor=lightblue, label="story 03", shape=rect, style=filled];
+10 [fillcolor=lightblue, label="story 04", shape=rect, style=filled];
+11 [fillcolor=lightblue, label="story 05", shape=rect, style=filled];
+12 [fillcolor=lightblue, label="story 06", shape=rect, style=filled];
+13 [fillcolor=lightblue, label="story 07", shape=rect, style=filled];
+14 [fillcolor=lightblue, label="story 08", shape=rect, style=filled];
+15 [fillcolor=lightblue, label="story 09", shape=rect, style=filled];
+16 [fillcolor=lightblue, label="story 10", shape=rect, style=filled];
+17 [fillcolor=lightblue, label="story 11", shape=rect, style=filled];
+18 [fillcolor=lightblue, label="story 12", shape=rect, style=filled];
+19 [fillcolor=lightblue, label="story 13", shape=rect, style=filled];
+20 [fillcolor=lightblue, label="story 14", shape=rect, style=filled];
+21 [fillcolor=lightblue, label="story 15", shape=rect, style=filled];
+22 [fillcolor=lightblue, label="story 16", shape=rect, style=filled];
+23 [fillcolor=lightblue, label="story 17", shape=rect, style=filled];
+24 [fillcolor=lightblue, label="story 18", shape=rect, style=filled];
+25 [fillcolor=lightblue, label="story 19", shape=rect, style=filled];
+26 [fillcolor=lightblue, label="story 20", shape=rect, style=filled];
+27 [fillcolor=lightblue, label="story 21", shape=rect, style=filled];
+28 [fillcolor=lightblue, label="story 22", shape=rect, style=filled];
+29 [fillcolor=lightblue, label="story 23", shape=rect, style=filled];
+30 [fillcolor=lightblue, label="story 24", shape=rect, style=filled];
+31 [fillcolor=lightblue, label="story 25", shape=rect, style=filled];
+32 [fillcolor=lightblue, label="story 26", shape=rect, style=filled];
+33 [fillcolor=lightblue, label="story 27", shape=rect, style=filled];
+34 [fillcolor=lightblue, label="story 28", shape=rect, style=filled];
+35 [fillcolor=lightblue, label="story 29", shape=rect, style=filled];
+36 [fillcolor=lightblue, label="story 30", shape=rect, style=filled];
+37 [fillcolor=lightblue, label="story 31", shape=rect, style=filled];
+38 [fillcolor=lightblue, label="story 32", shape=rect, style=filled];
+39 [fillcolor=lightblue, label="story 33", shape=rect, style=filled];
+40 [fillcolor=lightblue, label="story 34", shape=rect, style=filled];
+41 [fillcolor=lightblue, label="story 35", shape=rect, style=filled];
+42 [fillcolor=lightblue, label="story 36", shape=rect, style=filled];
+43 [fillcolor=lightblue, label="story 37", shape=rect, style=filled];
+44 [fillcolor=lightblue, label="story 38", shape=rect, style=filled];
+45 [fillcolor=lightblue, label="story 39", shape=rect, style=filled];
+46 [fillcolor=lightblue, label="story 40", shape=rect, style=filled];
+47 [fillcolor=lightblue, label="story 41", shape=rect, style=filled];
+48 [fillcolor=lightblue, label="story 42", shape=rect, style=filled];
+49 [fillcolor=lightblue, label="story 43", shape=rect, style=filled];
+50 [fillcolor=lightblue, label="story 44", shape=rect, style=filled];
+51 [fillcolor=lightblue, label="story 45", shape=rect, style=filled];
+52 [fillcolor=lightblue, label="story 46", shape=rect, style=filled];
+53 [fillcolor=lightblue, label="story 47", shape=rect, style=filled];
+54 [fillcolor=lightblue, label="story 48", shape=rect, style=filled];
+55 [fillcolor=lightblue, label="story 49", shape=rect, style=filled];
+56 [fillcolor=lightblue, label="story 50", shape=rect, style=filled];
+57 [fillcolor=lightblue, label="story 51", shape=rect, style=filled];
+58 [fillcolor=lightblue, label="story 52", shape=rect, style=filled];
+59 [fillcolor=lightblue, label="story 53", shape=rect, style=filled];
+60 [fillcolor=lightblue, label="story 54", shape=rect, style=filled];
+61 [fillcolor=lightblue, label="story 55", shape=rect, style=filled];
+62 [fillcolor=lightblue, label="story 56", shape=rect, style=filled];
+63 [fillcolor=lightblue, label="story 57", shape=rect, style=filled];
+64 [fillcolor=lightblue, label="story 58", shape=rect, style=filled];
+65 [fillcolor=lightblue, label="story 59", shape=rect, style=filled];
+66 [fillcolor=lightblue, label="story 60", shape=rect, style=filled];
+67 [fillcolor=lightblue, label="story 61", shape=rect, style=filled];
+68 [fillcolor=lightblue, label="story 62", shape=rect, style=filled];
+69 [fillcolor=lightblue, label="story 63", shape=rect, style=filled];
+70 [fillcolor=lightblue, label="story 64", shape=rect, style=filled];
+71 [fillcolor=lightblue, label="story 65", shape=rect, style=filled];
+72 [fillcolor=lightblue, label="story 66", shape=rect, style=filled];
+73 [fillcolor=lightblue, label="story 67", shape=rect, style=filled];
+74 [fillcolor=lightblue, label="story 68", shape=rect, style=filled];
+75 [fillcolor=lightblue, label="story 69", shape=rect, style=filled];
+76 [fillcolor=lightblue, label="story 70", shape=rect, style=filled];
+77 [fillcolor=lightblue, label="story 71", shape=rect, style=filled];
+78 [fillcolor=lightblue, label="story 72", shape=rect, style=filled];
+79 [fillcolor=lightblue, label="story 73", shape=rect, style=filled];
+80 [fillcolor=lightblue, label="story 74", shape=rect, style=filled];
+81 [fillcolor=lightblue, label="story 75", shape=rect, style=filled];
+82 [fillcolor=lightblue, label="story 76", shape=rect, style=filled];
+83 [fillcolor=lightblue, label="story 77", shape=rect, style=filled];
+84 [fillcolor=lightblue, label="story 78", shape=rect, style=filled];
+85 [fillcolor=lightblue, label="story 79", shape=rect, style=filled];
+86 [fillcolor=lightblue, label="story 80", shape=rect, style=filled];
+87 [fillcolor=lightblue, label="story 81", shape=rect, style=filled];
+88 [fillcolor=lightblue, label="story 82", shape=rect, style=filled];
+89 [fillcolor=lightblue, label="story 83", shape=rect, style=filled];
+90 [fillcolor=lightblue, label="story 84", shape=rect, style=filled];
+91 [fillcolor=lightblue, label="story 85", shape=rect, style=filled];
+92 [fillcolor=lightblue, label="story 86", shape=rect, style=filled];
+93 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+94 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+95 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+96 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+97 [fillcolor=lightblue, label="Generated Story 8...", shape=rect, style=filled];
+98 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+99 [fillcolor=lightblue, label="Generated Story 8...", shape=rect, style=filled];
+100 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+101 [fillcolor=lightblue, label="Generated Story -...", shape=rect, style=filled];
+102 [fillcolor=lightblue, label="Maths Story 1", shape=rect, style=filled];
+103 [fillcolor=lightblue, label="Maths Story 2", shape=rect, style=filled];
+104 [fillcolor=lightblue, label="Maths Story 3", shape=rect, style=filled];
+105 [fillcolor=lightblue, label="Maths Story 4", shape=rect, style=filled];
+106 [fillcolor=lightblue, label="Maths Story 5", shape=rect, style=filled];
+107 [fillcolor=lightblue, label="Maths Story 6", shape=rect, style=filled];
+0 -> 1  [key=0];
+0 -> 2  [key=0];
+0 -> 3  [key=0];
+0 -> 4  [key=0];
+0 -> 5  [key=0];
+0 -> 6  [key=0];
+0 -> 7  [key=0];
+0 -> 8  [key=0];
+0 -> 9  [key=0];
+0 -> 10  [key=0];
+0 -> 11  [key=0];
+0 -> 12  [key=0];
+0 -> 13  [key=0];
+0 -> 14  [key=0];
+0 -> 15  [key=0];
+0 -> 16  [key=0];
+0 -> 17  [key=0];
+0 -> 18  [key=0];
+0 -> 19  [key=0];
+0 -> 20  [key=0];
+0 -> 21  [key=0];
+0 -> 22  [key=0];
+0 -> 23  [key=0];
+0 -> 24  [key=0];
+0 -> 25  [key=0];
+0 -> 26  [key=0];
+0 -> 27  [key=0];
+0 -> 28  [key=0];
+0 -> 29  [key=0];
+0 -> 30  [key=0];
+0 -> 31  [key=0];
+0 -> 32  [key=0];
+0 -> 33  [key=0];
+0 -> 34  [key=0];
+0 -> 35  [key=0];
+0 -> 36  [key=0];
+0 -> 37  [key=0];
+0 -> 38  [key=0];
+0 -> 39  [key=0];
+0 -> 40  [key=0];
+0 -> 41  [key=0];
+0 -> 42  [key=0];
+0 -> 43  [key=0];
+0 -> 44  [key=0];
+0 -> 45  [key=0];
+0 -> 46  [key=0];
+0 -> 47  [key=0];
+0 -> 48  [key=0];
+0 -> 49  [key=0];
+0 -> 50  [key=0];
+0 -> 51  [key=0];
+0 -> 52  [key=0];
+0 -> 53  [key=0];
+0 -> 54  [key=0];
+0 -> 55  [key=0];
+0 -> 56  [key=0];
+0 -> 57  [key=0];
+0 -> 58  [key=0];
+0 -> 59  [key=0];
+0 -> 60  [key=0];
+0 -> 61  [key=0];
+0 -> 62  [key=0];
+0 -> 63  [key=0];
+0 -> 64  [key=0];
+0 -> 65  [key=0];
+0 -> 66  [key=0];
+0 -> 67  [key=0];
+0 -> 68  [key=0];
+0 -> 69  [key=0];
+0 -> 70  [key=0];
+0 -> 71  [key=0];
+0 -> 72  [key=0];
+0 -> 73  [key=0];
+0 -> 74  [key=0];
+0 -> 75  [key=0];
+0 -> 76  [key=0];
+0 -> 77  [key=0];
+0 -> 78  [key=0];
+0 -> 79  [key=0];
+0 -> 80  [key=0];
+0 -> 81  [key=0];
+0 -> 82  [key=0];
+0 -> 83  [key=0];
+0 -> 84  [key=0];
+0 -> 85  [key=0];
+0 -> 86  [key=0];
+0 -> 87  [key=0];
+0 -> 88  [key=0];
+0 -> 89  [key=0];
+0 -> 90  [key=0];
+0 -> 91  [key=0];
+0 -> 92  [key=0];
+0 -> 93  [key=0];
+0 -> 94  [key=0];
+0 -> 95  [key=0];
+0 -> 96  [key=0];
+0 -> 97  [key=0];
+0 -> 98  [key=0];
+0 -> 99  [key=0];
+0 -> 100  [key=0];
+0 -> 101  [key=0];
+0 -> 102  [key=0];
+0 -> 103  [key=0];
+0 -> 104  [key=0];
+0 -> 105  [key=0];
+0 -> 106  [key=0];
+0 -> 107  [key=0];
+1 -> "-1"  [key=0];
+2 -> "-1"  [key=0];
+3 -> "-1"  [key=0];
+4 -> "-1"  [key=0];
+5 -> "-1"  [key=0];
+6 -> "-1"  [key=0];
+7 -> "-1"  [key=0];
+8 -> "-1"  [key=0];
+9 -> "-1"  [key=0];
+10 -> "-1"  [key=0];
+11 -> "-1"  [key=0];
+12 -> "-1"  [key=0];
+13 -> "-1"  [key=0];
+14 -> "-1"  [key=0];
+15 -> "-1"  [key=0];
+16 -> "-1"  [key=0];
+17 -> "-1"  [key=0];
+18 -> "-1"  [key=0];
+19 -> "-1"  [key=0];
+20 -> "-1"  [key=0];
+21 -> "-1"  [key=0];
+22 -> "-1"  [key=0];
+23 -> "-1"  [key=0];
+24 -> "-1"  [key=0];
+25 -> "-1"  [key=0];
+26 -> "-1"  [key=0];
+27 -> "-1"  [key=0];
+28 -> "-1"  [key=0];
+29 -> "-1"  [key=0];
+30 -> "-1"  [key=0];
+31 -> "-1"  [key=0];
+32 -> "-1"  [key=0];
+33 -> "-1"  [key=0];
+34 -> "-1"  [key=0];
+35 -> "-1"  [key=0];
+36 -> "-1"  [key=0];
+37 -> "-1"  [key=0];
+38 -> "-1"  [key=0];
+39 -> "-1"  [key=0];
+40 -> "-1"  [key=0];
+41 -> "-1"  [key=0];
+42 -> "-1"  [key=0];
+43 -> "-1"  [key=0];
+44 -> "-1"  [key=0];
+45 -> "-1"  [key=0];
+46 -> "-1"  [key=0];
+47 -> "-1"  [key=0];
+48 -> "-1"  [key=0];
+49 -> "-1"  [key=0];
+50 -> "-1"  [key=0];
+51 -> "-1"  [key=0];
+52 -> "-1"  [key=0];
+53 -> "-1"  [key=0];
+54 -> "-1"  [key=0];
+55 -> "-1"  [key=0];
+56 -> "-1"  [key=0];
+57 -> "-1"  [key=0];
+58 -> "-1"  [key=0];
+59 -> "-1"  [key=0];
+60 -> "-1"  [key=0];
+61 -> "-1"  [key=0];
+62 -> "-1"  [key=0];
+63 -> "-1"  [key=0];
+64 -> "-1"  [key=0];
+65 -> "-1"  [key=0];
+66 -> "-1"  [key=0];
+67 -> "-1"  [key=0];
+68 -> "-1"  [key=0];
+69 -> "-1"  [key=0];
+70 -> "-1"  [key=0];
+71 -> "-1"  [key=0];
+72 -> "-1"  [key=0];
+73 -> "-1"  [key=0];
+74 -> "-1"  [key=0];
+75 -> "-1"  [key=0];
+76 -> "-1"  [key=0];
+77 -> "-1"  [key=0];
+78 -> "-1"  [key=0];
+79 -> "-1"  [key=0];
+80 -> "-1"  [key=0];
+81 -> "-1"  [key=0];
+82 -> "-1"  [key=0];
+83 -> "-1"  [key=0];
+84 -> "-1"  [key=0];
+85 -> "-1"  [key=0];
+86 -> "-1"  [key=0];
+87 -> "-1"  [key=0];
+88 -> "-1"  [key=0];
+89 -> "-1"  [key=0];
+90 -> "-1"  [key=0];
+91 -> "-1"  [key=0];
+92 -> "-1"  [key=0];
+93 -> "-1"  [key=0];
+94 -> "-1"  [key=0];
+95 -> "-1"  [key=0];
+96 -> "-1"  [key=0];
+97 -> "-1"  [key=0];
+98 -> "-1"  [key=0];
+99 -> "-1"  [key=0];
+100 -> "-1"  [key=0];
+101 -> "-1"  [key=0];
+102 -> "-1"  [key=0];
+103 -> "-1"  [key=0];
+104 -> "-1"  [key=0];
+105 -> "-1"  [key=0];
+106 -> "-1"  [key=0];
+107 -> "-1"  [key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>

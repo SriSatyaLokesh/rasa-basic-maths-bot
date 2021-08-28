@@ -10,49 +10,13 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
+from rasa_sdk.events import SlotSet, EventType, FollowupAction
 
-
-class ActionHelloWorld(Action):
-
-    def name(self) -> Text:
-        return "action_hello_world"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        file = open("actions/api_utils/questions.json")
-        questionsJson = json.load(file)
-        questions = questionsJson["problems"]
-        msgText = questions[random.randint(0,len(questions)-1)]
-        buttonDetails = {
-            "Hint" : "/hint",
-            "Submit": "/answer{'question':'"+msgText["problem"]+"','answer':'"+msgText["answer"]+"'}"
-        }
-        buttons = []
-        for button in buttonDetails:
-            buttons.append(
-                {
-                    "title": "{}".format(button),
-                    "payload": buttonDetails[button],
-                }
-            )
-
-        dispatcher.utter_message(
-            text= "what is the answer of "+msgText["problem"]+"?",
-            image=None,
-            json_message=None,
-            response=None,
-            attachment=None,
-            buttons=buttons,
-            elements=None,
-        )
-
-        return []
 
 class SolveProblemForm(FormAction):
 
     def name(self) -> Text:
-        return "action_solve_problem"
+        return "action_answer_problem"
     
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
@@ -110,6 +74,7 @@ class SolveProblemForm(FormAction):
         print(reg)
         expression = ''.join(reg)
         return expression
+
     def submit(self,
                dispatcher: CollectingDispatcher,
                tracker: Tracker,
@@ -143,3 +108,94 @@ class SolveProblemForm(FormAction):
                 elements=None,
             )
         return []
+
+
+class QnAPracticeForm(FormAction):
+    def name(self) -> Text:
+        print("came here")
+        return "practice_form"
+    
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        """A list of required slots that the form has to fill"""
+        return ["ready","answer"]
+    
+    def slot_mappings(self):
+        print("mappings")
+        return {
+            "ready": [
+                self.from_text(intent=None)
+            ],
+            "answer": [
+                self.from_entity(entity="answer", intent="submit_answer")
+            ]
+        }
+
+    def validate_ready(self,
+                        value: Text,
+                        dispatcher: CollectingDispatcher,
+                        tracker: Tracker,
+                        domain: Dict[Text, Any]):
+        print("recieved ready or not - ", value)
+        if tracker.latest_message.get('intent').get('name') == "confirmation.yes":
+            file = open("actions/api_utils/questions.json")
+            questionsJson = json.load(file)
+            questions = questionsJson["problems"]
+            qna = questions[random.randint(0,len(questions)-1)]
+            question=qna.get("question")
+            buttonDetails = {
+                "Hint" : "/user.request_hint",
+                "Submit": "/submit_answer{'question':'"+str(question)+"','answer':'"+str(qna.get("answer"))+"'}"
+            }
+            buttons = []
+            for button in buttonDetails:
+                buttons.append(
+                    {
+                        "title": "{}".format(button),
+                        "payload": buttonDetails[button],
+                    }
+                )
+            dispatcher.utter_message(
+                text= "Solve "+str(question),
+                buttons=buttons
+            )
+            return {"ready":"yes","question":question}
+        else:
+            return {"ready","no"}
+
+    def validate_answer(self,
+                            value: Text,
+                            dispatcher: CollectingDispatcher,
+                            tracker: Tracker,
+                            domain: Dict[Text, Any]):
+        print("recieved answer - ", value)
+        if value.isnumeric():
+            return {"answer": value}
+        else:
+            return {"answer": None}
+
+    async def run(
+        self,
+        dispatcher: "CollectingDispatcher",
+        tracker: "Tracker",
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+        latest_intent = tracker.latest_message["intent"].get("name")
+        if tracker.active_form.get("name", self.name()) != self.name():
+            return self.deactivate() + [FollowupAction(name=self.name())]
+        tracker.latest_action_name = "action_listen"
+        return await super().run(dispatcher, tracker, domain)
+
+    def submit(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[EventType]:
+            question = str(tracker.slots.get("question"))
+            user_answer = int(tracker.slots.get("answer"))
+            actual_answer = eval(question)
+            print(actual_answer)
+            if user_answer == actual_answer:
+                dispatcher.utter_message(response= "utter_you_did_it")
+            else:
+                dispatcher.utter_message(text="Oh NO! Wrong Answer.")
+            dispatcher.utter_message(response= "utter_ask_another_problem")
+            return [SlotSet("ready",None), SlotSet("answer",None), SlotSet("question",None)]

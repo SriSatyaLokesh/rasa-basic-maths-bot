@@ -345,12 +345,6 @@ stories:
   steps:
   - intent: confirmation.no
   - action: utter_confirmation.no
-- story: Telegram story 1
-  steps:
-  - intent: start
-  - action: action_hello_world
-  - intent: user.happy
-  - action: utter_agent.happy
 - story: Generated Story -1957476507798035057
   steps:
   - intent: greetings.hello
@@ -544,7 +538,11 @@ stories:
   - intent: user.want_help
   - action: utter_ask_expression
   - intent: agent.solve
-  - action: action_solve_problem
+    entities: 
+    - expression: "(43 * 2)"
+  - slot_was_set:
+    - expression: "(43 * 2)"
+  - action: action_answer_problem
   - intent: appraisal.thank_you
   - action: utter_appraisal.well_done
 - story: Maths Story 2
@@ -552,8 +550,100 @@ stories:
   - intent: greetings.hello
   - action: utter_greetings.hello
   - intent: agent.solve
-  - action: action_solve_problem
+    entities: 
+    - expression: "22-32"
+  - slot_was_set:
+    - expression: "22-32"
+  - action: action_answer_problem
   - intent: agent.solve
-  - action: action_solve_problem
+    entities: 
+    - expression: "243 + 32"
+  - slot_was_set:
+    - expression: "243 + 32"
+  - action: action_answer_problem
   - intent: appraisal.thank_you
   - action: utter_appraisal.well_done
+
+- story: Maths Story 3
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.solve
+    entities: 
+    - expression: "145/(2+7*3)-30.70123"
+  - slot_was_set:
+    - expression: "145/(2+7*3)-30.70123"
+  - action: action_answer_problem
+  - intent: user.ask_how
+  - action: utter_solved_method
+  - intent: user.wonder_how
+  - action: utter_agent.boss
+  - intent: user.help_to_practice
+  - action: utter_ask_practice
+  - intent: confirmation.yes
+  - action: practice_form
+  - intent: submit_answer
+  - action: utter_ask_another_problem
+  - intent: confirmation.yes
+  - action: practice_form
+
+- story: Maths Story 4
+  steps:
+  - intent: greetings.hello
+  - action: utter_greetings.hello
+  - intent: agent.solve
+    entities: 
+    - expression: "2145 - 30"
+  - slot_was_set:
+    - expression: "2145 - 30"
+  - action: action_answer_problem
+  - intent: user.ask_how
+  - action: utter_solved_method
+  - intent: user.wonder_how
+  - action: utter_agent.boss
+  - intent: user.help_to_practice
+  - action: utter_ask_practice
+  - intent: confirmation.yes
+  - action: practice_form
+  - intent: user.request_hint
+  - action: utter_hint
+  - intent: submit_answer
+  - intent: confirmation.no
+  - action: utter_greetings.bye
+
+- story: Maths Story 5
+  steps:
+  - intent: user.help_to_practice
+  - action: utter_ask_practice
+  - intent: confirmation.yes
+    entities: 
+    - ready: "yes"
+  - action: practice_form
+  - intent: user.request_hint
+  - action: utter_hint
+  - intent: submit_answer
+  - intent: confirmation.no
+    entities: 
+    - ready: "no"
+  - action: utter_greetings.bye
+
+- story: Maths Story 6
+  steps:
+  - intent: user.help_to_practice
+  - action: utter_ask_practice
+  - intent: confirmation.yes
+    entities: 
+    - ready: "yes"
+  - action: practice_form
+  - intent: user.request_hint
+  - action: utter_hint
+  - intent: submit_answer
+  - intent: confirmation.yes
+    entities: 
+    - ready: "yes"
+  - action: practice_form
+  - intent: submit_answer
+  - intent: confirmation.no
+    entities: 
+    - ready: "no"
+  - action: utter_greetings.bye

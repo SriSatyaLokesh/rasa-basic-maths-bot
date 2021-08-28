@@ -20,9 +20,15 @@ rules:
 - rule: Always trigger solve Form wfor solve intent
   steps:
   - intent: agent.solve
-  - action: action_solve_problem
+  - action: action_answer_problem
 
 - rule: Always trigger AskHelp Form wfor wanthelp intent
   steps:
   - intent: user.want_help
   - action: utter_ask_expression
+
+- rule: Activate form
+  steps:
+  - action: utter_ask_practice
+  - intent: confirmation.yes
+  - action: practice_form
