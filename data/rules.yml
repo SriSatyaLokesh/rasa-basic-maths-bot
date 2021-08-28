@@ -17,15 +17,21 @@ rules:
   - intent: agent.chatbot
   - action: utter_agent.chatbot
 
-- rule: Always trigger solve Form wfor solve intent
+- rule: Always trigger solve Form for solve intent
   steps:
   - intent: agent.solve
   - action: action_answer_problem
 
-- rule: Always trigger AskHelp Form wfor wanthelp intent
+- rule: Always trigger AskHelp Form for wanthelp intent
   steps:
   - intent: user.want_help
   - action: utter_ask_expression
+
+- rule: Always trigger AskHelp Form for hint intent
+  steps:
+  - intent: user.request_hint
+  - action: utter_hint
+  - action: practice_form
 
 - rule: Activate form
   steps:

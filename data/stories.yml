@@ -607,8 +607,12 @@ stories:
   - action: practice_form
   - intent: user.request_hint
   - action: utter_hint
+  - action: practice_form
   - intent: submit_answer
+    entities:
+    - answer: 120
   - intent: confirmation.no
+  - active_loop: null
   - action: utter_greetings.bye
 
 - story: Maths Story 5
@@ -621,7 +625,10 @@ stories:
   - action: practice_form
   - intent: user.request_hint
   - action: utter_hint
+  - action: practice_form
   - intent: submit_answer
+    entities:
+    - answer: 203
   - intent: confirmation.no
     entities: 
     - ready: "no"
@@ -637,7 +644,10 @@ stories:
   - action: practice_form
   - intent: user.request_hint
   - action: utter_hint
+  - action: practice_form
   - intent: submit_answer
+    entities:
+    - answer: 20
   - intent: confirmation.yes
     entities: 
     - ready: "yes"

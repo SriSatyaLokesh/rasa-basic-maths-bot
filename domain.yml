@@ -128,12 +128,6 @@ slots:
     influence_conversation: false
   requested_slot:
     type: any
-  previous_form_name:
-    type: text
-    influence_conversation: true
-  next_form_name:
-    type: text
-    influence_conversation: true
 responses:
   utter_start:
   - text: Hey! I can help you to solve your maths question. Ask me if you have any
@@ -615,5 +609,5 @@ actions:
 - utter_confirmation.cancel
 - utter_confirmation.no
 - utter_ask_expression
-forms: []
+forms: {}
 e2e_actions: []
