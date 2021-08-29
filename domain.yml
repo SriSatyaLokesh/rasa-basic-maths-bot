@@ -129,6 +129,8 @@ slots:
   requested_slot:
     type: any
 responses:
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
   utter_start:
   - text: Hey! I can help you to solve your maths question. Ask me if you have any
   utter_ask_expression:
@@ -509,7 +511,7 @@ responses:
   - text: Okay, cancelled. What next?
   - text: Cancelled! What would you like to do next?
   utter_confirmation.no:
-  - text: Okay.
+  - text: Okay See you then.
   - text: Understood.
   - text: I see.
   - text: I understand.
@@ -517,6 +519,7 @@ responses:
 actions:
 - start
 - practice_form
+- utter_please_rephrase
 - action_solve_question
 - action_answer_problem
 - utter_ask_practice

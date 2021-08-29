@@ -344,7 +344,7 @@ stories:
 - story: story 86
   steps:
   - intent: confirmation.no
-  - action: utter_confirmation.no
+  - action: utter_greetings.bye
 - story: Generated Story -1957476507798035057
   steps:
   - intent: greetings.hello

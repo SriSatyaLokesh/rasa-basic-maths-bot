@@ -66,13 +66,14 @@ class SolveProblemForm(FormAction):
                         buttons=None,
                         elements=None,
                     )
-        return {'expression': expression}
+            return {'expression': expression}
 
     def solve_again(self,msg):
         print(msg)
         reg = re.findall(r'[0-9.]+|[*/+\-\^\(\)]', msg)
         print(reg)
         expression = ''.join(reg)
+        print(expression)
         return expression
 
     def submit(self,
@@ -199,3 +200,21 @@ class QnAPracticeForm(FormAction):
                 dispatcher.utter_message(text="Oh NO! Wrong Answer.")
             dispatcher.utter_message(response= "utter_ask_another_problem")
             return [SlotSet("ready",None), SlotSet("answer",None), SlotSet("question",None)]
+    
+class ActionDefaultFallback(Action):
+    """Executes the fallback action and goes back to the previous state
+    of the dialogue"""
+
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(response="utter_please_rephrase")
+
+        # Revert user message which led to fallback.
+        return [UserUtteranceReverted()]

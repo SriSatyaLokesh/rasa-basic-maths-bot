@@ -27,6 +27,11 @@ rules:
   - intent: user.want_help
   - action: utter_ask_expression
 
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
 - rule: Always trigger AskHelp Form for hint intent
   steps:
   - intent: user.request_hint
@@ -38,3 +43,15 @@ rules:
   - action: utter_ask_practice
   - intent: confirmation.yes
   - action: practice_form
+
+- rule: Loop form
+  steps:
+  - action: practice_form
+  - intent: confirmation.yes
+  - action: practice_form
+
+- rule: Deactivate form
+  steps:
+  - action: practice_form
+  - intent: confirmation.no
+  - action: utter_greetings.bye
